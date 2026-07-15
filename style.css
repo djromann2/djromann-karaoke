@@ -191,3 +191,46 @@ h1{
     }
 
 }
+.footer{
+
+    margin-top:60px;
+
+    text-align:center;
+
+    color:#9CA3AF;
+
+    font-size:14px;
+
+    padding:30px 0;
+
+}
+
+.footer a{
+
+    color:#60A5FA;
+
+    text-decoration:none;
+
+}
+
+.footer a:hover{
+
+    text-decoration:underline;
+
+}
+.footer {
+    margin-top: 50px;
+    padding: 30px 0;
+    text-align: center;
+    color: #9CA3AF;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #60A5FA;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

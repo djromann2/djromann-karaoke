@@ -24,7 +24,14 @@ searchBox.addEventListener("input", function () {
     if (search.length < 2) {
 
         resultsDiv.innerHTML =
-            '<div class="welcome">Start typing to search...</div>';
+            `
+<div class="welcome">
+    <h2>🎤 Welcome!</h2>
+    <p>Search by artist or song title.</p>
+    <br>
+    <p>When you find your song, write the <strong>Artist</strong> and <strong>Song Title</strong> on your request card.</p>
+</div>
+`;
 
         return;
     }
@@ -52,6 +59,7 @@ songs.forEach(song => {
 });
 
 const matches = Array.from(uniqueSongs.values());
+console.log("Total matches:", matches.length);
 
 matches.sort((a, b) => {
 
@@ -63,7 +71,7 @@ matches.sort((a, b) => {
 
 });
 
-    displayResults(matches.slice(0,25));
+    displayResults(matches);
 
 });
 
@@ -82,21 +90,33 @@ function displayResults(matches){
 
     resultsDiv.innerHTML="";
 
-    const total = matches.length;
-const shown = Math.min(total, 25);
+   const total = matches.length;
+const shownSongs = matches.slice(0, 25);
+const shown = shownSongs.length;
 
-document.getElementById("counter").innerHTML =
-    `Showing ${shown} of ${total} songs`;
+if (total === 0) {
+    document.getElementById("counter").innerHTML = "";
+} else if (total <= 25) {
+    document.getElementById("counter").innerHTML =
+        `${total} song${total === 1 ? "" : "s"} found`;
+} else {
+    document.getElementById("counter").innerHTML =
+        `Showing first ${shown} of ${total} songs`;
+}
 
     if(matches.length===0){
 
-        resultsDiv.innerHTML="<div class='welcome'>No songs found.</div>";
+        resultsDiv.innerHTML=`
+<div class="welcome">
+    <h2>😕 No songs found</h2>
+    <p>Try another spelling or search by the artist's name.</p>
+</div>`;
 
         return;
 
     }
 
-    matches.forEach(song=>{
+    shownSongs.forEach(song=>{
 
         resultsDiv.innerHTML += `
 

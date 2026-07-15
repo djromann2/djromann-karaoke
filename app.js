@@ -1,5 +1,10 @@
 let songs = [];
 
+let currentMatches = [];
+let visibleSongs = 25;
+
+const SONGS_PER_PAGE = 25;
+
 const searchBox = document.getElementById("searchBox");
 const resultsDiv = document.getElementById("results");
 
@@ -71,7 +76,11 @@ matches.sort((a, b) => {
 
 });
 
-    displayResults(matches);
+    currentMatches = matches;
+
+visibleSongs = SONGS_PER_PAGE;
+
+displayResults();
 
 });
 
@@ -86,13 +95,16 @@ function cleanTitle(title){
 }
 
 
-function displayResults(matches){
+function displayResults(){
 
     resultsDiv.innerHTML="";
 
-   const total = matches.length;
-const shownSongs = matches.slice(0, 25);
+   const total = currentMatches.length;
+
+const shownSongs = currentMatches.slice(0, visibleSongs);
+
 const shown = shownSongs.length;
+
 
 if (total === 0) {
     document.getElementById("counter").innerHTML = "";
@@ -104,7 +116,7 @@ if (total === 0) {
         `Showing first ${shown} of ${total} songs`;
 }
 
-    if(matches.length===0){
+    if(currentMatches.length===0){
 
         resultsDiv.innerHTML=`
 <div class="welcome">
@@ -138,6 +150,38 @@ shownSongs.forEach(song => {
 
 });
 
+if (visibleSongs < total) {
+
+    html += `
+
+    <div style="text-align:center; margin-top:25px;">
+
+        <button id="showMoreBtn" class="show-more">
+
+            ▼ Show More Songs
+
+        </button>
+
+    </div>
+
+    `;
+
+}
+
 resultsDiv.innerHTML = html;
+
+const button = document.getElementById("showMoreBtn");
+
+if(button){
+
+    button.addEventListener("click", function(){
+
+        visibleSongs += SONGS_PER_PAGE;
+
+        displayResults();
+
+    });
+
+}
 
 }

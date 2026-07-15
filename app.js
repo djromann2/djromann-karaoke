@@ -116,30 +116,28 @@ if (total === 0) {
 
     }
 
-    shownSongs.forEach(song=>{
+    let html = "";
 
-        resultsDiv.innerHTML += `
+shownSongs.forEach(song => {
+
+    html += `
 
         <div class="song">
 
             <div class="title">
-
                 ${cleanTitle(song.Title)}
-
             </div>
 
             <div class="artist">
-
                 ${song.Artist}
-
             </div>
-
-           
 
         </div>
 
-        `;
+    `;
 
-    });
+});
+
+resultsDiv.innerHTML = html;
 
 }
